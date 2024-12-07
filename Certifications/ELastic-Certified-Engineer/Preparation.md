@@ -59,6 +59,31 @@ PUT testindex2 {
 
 
 **Example 3:**
+![](https://github.com/cryptocean22/ELK/blob/main/Certifications/ELastic-Certified-Engineer/Pictures/Bildschirmfoto%202024-12-07%20um%2020.49.30.png?raw=true)
+
+```JSON
+PUT testindex2 {
+  "settings": {
+    "number_of_shards": 3,
+    "number_of_replicas": 2
+  }
+}
+```
+- Total shards are calculated as:
+  - `Total Shards = Primary Shards x (1 + Number of Replicas)`
+  - `Total Shards = 3 x (1 + 2) = 9`
+
+- There are 3 nodes, meaning three Elasticsearch instances. The shards are distributed across these nodes.
+- Each primary shard has 2 replicas. For example:
+  - P1 has replicas P1R1 and P1R2.
+	- P2 has replicas P2R1 and P2R2.
+	- P3 has replicas P3R1 and P3R2.
+- Elasticsearch automatically distributes primary and replica shards across nodes for fault tolerance and performance.
+- Each node holds a mix of primary and replica shards. For example:
+  - Node 1: Holds P1, P2R1, P3R1.
+	- Node 2: Holds P2, P1R1, P3R2.
+	- Node 3: Holds P3, P1R2, P2R2.
+
 
 
 
