@@ -1,46 +1,55 @@
-# 1. Create (Index a Document)
-POST my_index/_doc/1
+### Create a document with id
+PUT /inventory/_doc/101
 {
-  "name": "Alice",
-  "age": 25,
-  "occupation": "Data Analyst"
+  "name": "Tablet",
+  "price": "400",
+  "quantity": 200
 }
 
-
-# 2. Read (Retrieve Data)
-## Option 1: 
-GET my_index/_doc/1
-
-## Option 2: 
-GET my_index/_search
-{
-  "query": {
-    "match": {
-      "occupation": "Data Analyst"
-    }
-  }
-}
-
-# 3. Update (Modify an Existing Document)
-## Example 1:
-POST my_index/_update/1
+POST /inventory/_update/101
 {
   "doc": {
-    "age": 26
+    "quantity": 150
   }
 }
 
-## Example 2: 
-POST my_index/_update/1
+POST /inventory/_update/101
 {
   "doc": {
     "labels": [
-        "electronics",
-        "mobiles"
+      "electronics",
+      "mobiles"
     ]
   }
 }
 
-# 4. Delete (Remove a Document)
-DELETE my_index/_doc/1
+POST /inventory/_update/101
+{
+  "script": {
+    "source": "ctx._source.quantity = 300"
+  }
+}
 
+POST /inventory/_update/101
+{
+  "script": {
+    "source": "ctx._source.quantity -= params.amount",
+    "params": {
+      "amount": 50
+    }
+  }
+}
+
+POST /inventory/_update/101
+{
+	"script": {
+		"source": """
+    		if (ctx._source.quantity > 0) {
+				ctx._source.quantity--;
+			}
+		"""	
+	}
+}
+
+GET /inventory/_doc/101
+DELETE /inventory/_doc/101
