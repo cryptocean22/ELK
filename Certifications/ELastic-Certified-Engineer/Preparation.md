@@ -1,5 +1,5 @@
 # Elastic Certified Engineer Exam
-## Nodes, Shards, Replicas and Cluster 
+# 1. Nodes, Shards, Replicas and Cluster 
 
 | Term | Example |
 | ----------- | ----------- |
@@ -9,7 +9,7 @@
 | **Replica** | A copy of a shard; ensures data availability and improves search performance. |
 | **Cluster** | A group of nodes working together to manage and store data as one unit. |
 
-### How Elasticsearch handles nodes, shards, replicas
+## 1.1. How Elasticsearch handles nodes, shards, replicas
 **Example 1:**
 
 ![](https://raw.githubusercontent.com/cryptocean22/ELK/refs/heads/main/Certifications/ELastic-Certified-Engineer/Pictures/Bildschirmfoto%202024-12-07%20um%2020.49.05.png)
@@ -85,9 +85,58 @@ PUT testindex2 {
 	- Node 3: Holds P3, P1R2, P2R2.
 
 ---
+## 1.2. Elasticsearch Index Health and Shard Configuration
+### 1.2.1. Health Status Basics
+Elasticsearch index health is determined by the status of **primary** and **replica shards**:
 
-## Elasticsearch CRUD Operations 
-### Overview of CRUD Operations 
+- **Green**: All primary and replica shards are assigned.
+- **Yellow**: All primary shards are assigned, but some or all replica shards are unassigned.
+- **Red**: One or more primary shards are unassigned.
+
+### 1.2.2. Scenarios
+**1. Default Index Creation**
+Command:
+```KQL
+PUT employees
+```
+- Default Settings:
+  - number_of_shards: 1
+  - number_of_replicas: 1
+
+- Result:
+  - Elasticsearch creates:
+    - 1 primary shard
+    - 1 replica shard
+  - If there’s only one node, the replica cannot be assigned and remains unassigned.
+- Health Status: Yellow
+  - Reason: The primary shard is active, but the replica shard is unassigned.
+
+**2. Index with Custom Shard Settings**
+```KQL
+PUT employees
+{
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  }
+}
+```
+- Default Settings:
+  - number_of_shards: 1
+  - number_of_replicas: 0
+
+- Result:
+  - Elasticsearch creates:
+    - 1 primary shard
+    - 0 replica shard (explicitly set to 0)
+  - Since there are no replicas to assign, the cluster is fully operational.
+- Health Status: Green
+  - Reason: All primary shards are active, and no replicas are expected.
+
+---
+
+## 2. Elasticsearch CRUD Operations 
+### 2.1. Overview of CRUD Operations 
 | Operation  | HTTP Method | API Endpoint Example              | Purpose                                 |
 |------------|-------------|------------------------------------|-----------------------------------------|
 | **Create** | `POST`      | `POST my_index/_doc/1`            | Adds a new document to an index.        |
@@ -97,7 +146,6 @@ PUT testindex2 {
 
 
 ```KQL
-# Create (Index a Document)
 POST my_index/_doc/1
 {
   "name": "Alice",
@@ -105,12 +153,8 @@ POST my_index/_doc/1
   "occupation": "Data Analyst"
 }
 
-
-# Read (Retrieve Data)
-## Option 1: 
 GET my_index/_doc/1
 
-## Option 2: 
 GET my_index/_search
 {
   "query": {
@@ -120,7 +164,6 @@ GET my_index/_search
   }
 }
 
-# Update (Modify an Existing Document)
 POST my_index/_update/1
 {
   "doc": {
@@ -128,6 +171,8 @@ POST my_index/_update/1
   }
 }
 
-# Delete (Remove a Document)
 DELETE my_index/_doc/1
 ```
+
+---
+
