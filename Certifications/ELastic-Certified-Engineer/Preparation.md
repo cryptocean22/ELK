@@ -14,7 +14,7 @@
 
 ![](https://raw.githubusercontent.com/cryptocean22/ELK/refs/heads/main/Certifications/ELastic-Certified-Engineer/Pictures/Bildschirmfoto%202024-12-07%20um%2020.49.05.png)
 
-```JSON
+```KQL
 PUT testindex {
   "settings": {
     "number_of_shards": 1,
@@ -38,7 +38,7 @@ PUT testindex {
 **Example 2:**
 ![](https://github.com/cryptocean22/ELK/blob/main/Certifications/ELastic-Certified-Engineer/Pictures/Bildschirmfoto%202024-12-07%20um%2020.49.13.png?raw=true)
 
-```JSON
+```KQL
 PUT testindex2 {
   "settings": {
     "number_of_shards": 2,
@@ -61,7 +61,7 @@ PUT testindex2 {
 **Example 3:**
 ![](https://github.com/cryptocean22/ELK/blob/main/Certifications/ELastic-Certified-Engineer/Pictures/Bildschirmfoto%202024-12-07%20um%2020.49.30.png?raw=true)
 
-```JSON
+```KQL
 PUT testindex2 {
   "settings": {
     "number_of_shards": 3,
@@ -96,7 +96,7 @@ PUT testindex2 {
 | **Delete** | `DELETE`    | `DELETE my_index/_doc/1`          | Removes a document from an index.       |
 
 
-```JSON
+```KQL
 # 1. Create (Index a Document)
 POST my_index/_doc/1
 {
