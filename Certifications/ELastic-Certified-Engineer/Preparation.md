@@ -97,7 +97,7 @@ PUT testindex2 {
 
 
 ```KQL
-# 1. Create (Index a Document)
+# Create (Index a Document)
 POST my_index/_doc/1
 {
   "name": "Alice",
@@ -106,7 +106,7 @@ POST my_index/_doc/1
 }
 
 
-# 2. Read (Retrieve Data)
+# Read (Retrieve Data)
 ## Option 1: 
 GET my_index/_doc/1
 
@@ -120,7 +120,7 @@ GET my_index/_search
   }
 }
 
-# 3. Update (Modify an Existing Document)
+# Update (Modify an Existing Document)
 POST my_index/_update/1
 {
   "doc": {
@@ -128,6 +128,6 @@ POST my_index/_update/1
   }
 }
 
-# 4. Delete (Remove a Document)
+# Delete (Remove a Document)
 DELETE my_index/_doc/1
 ```
