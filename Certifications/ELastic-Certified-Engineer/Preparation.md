@@ -94,7 +94,7 @@ Elasticsearch index health is determined by the status of **primary** and **repl
 - **Red**: One or more primary shards are unassigned.
 
 ### 1.2.2. Scenarios
-**1. Default Index Creation**
+**Scenario 1: Default Index Creation**
 Command:
 ```KQL
 PUT employees
@@ -111,7 +111,7 @@ PUT employees
 - Health Status: Yellow
   - Reason: The primary shard is active, but the replica shard is unassigned.
 
-**2. Index with Custom Shard Settings**
+**Scenario 2: Index with Custom Shard Settings**
 ```KQL
 PUT employees
 {
