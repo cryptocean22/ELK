@@ -22,10 +22,22 @@ GET my_index/_search
 }
 
 # 3. Update (Modify an Existing Document)
+## Example 1:
 POST my_index/_update/1
 {
   "doc": {
     "age": 26
+  }
+}
+
+## Example 2: 
+POST my_index/_update/1
+{
+  "doc": {
+    "labels": [
+        "electronics",
+        "mobiles"
+    ]
   }
 }
 
