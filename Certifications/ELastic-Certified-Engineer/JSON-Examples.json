@@ -1,0 +1,34 @@
+# 1. Create (Index a Document)
+POST my_index/_doc/1
+{
+  "name": "Alice",
+  "age": 25,
+  "occupation": "Data Analyst"
+}
+
+
+# 2. Read (Retrieve Data)
+## Option 1: 
+GET my_index/_doc/1
+
+## Option 2: 
+GET my_index/_search
+{
+  "query": {
+    "match": {
+      "occupation": "Data Analyst"
+    }
+  }
+}
+
+# 3. Update (Modify an Existing Document)
+POST my_index/_update/1
+{
+  "doc": {
+    "age": 26
+  }
+}
+
+# 4. Delete (Remove a Document)
+DELETE my_index/_doc/1
+
