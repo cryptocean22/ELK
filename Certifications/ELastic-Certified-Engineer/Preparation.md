@@ -84,7 +84,58 @@ PUT testindex2 {
 	- Node 2: Holds P2, P1R1, P3R2.
 	- Node 3: Holds P3, P1R2, P2R2.
 
+---
 
+## Elasticsearch CRUD Operations 
+### Overview of CRUD Operations 
+| Operation  | HTTP Method | API Endpoint Example              | Purpose                                 |
+|------------|-------------|------------------------------------|-----------------------------------------|
+| **Create** | `POST`      | `POST my_index/_doc/1`            | Adds a new document to an index.        |
+| **Read**   | `GET`       | `GET my_index/_search`            | Retrieves data by ID or query.          |
+| **Update** | `POST`      | `POST my_index/_update/1`         | Modifies fields of an existing document.|
+| **Delete** | `DELETE`    | `DELETE my_index/_doc/1`          | Removes a document from an index.       |
 
+**Create - POST**
+```JSON
+POST my_index/_doc/1
+{
+  "name": "Alice",
+  "age": 25,
+  "occupation": "Data Analyst"
+}
+```
+- Index: my_index
+- Document ID: 1
+- Content: A JSON object representing the document data.
 
+**Read - GET**
+```JSON
+GET my_index/_doc/1
 
+GET my_index/_search
+{
+  "query": {
+    "match": {
+      "occupation": "Data Analyst"
+    }
+  }
+}
+```
+- Retrieves either a specific document (GET _doc/1) or all documents matching a query (match query for documents with occupation as "Data Analyst").
+
+**Update - POST**
+```JSON
+POST my_index/_update/1
+{
+  "doc": {
+    "age": 26
+  }
+}
+```
+- Updates only the age field of the document with ID 1. The rest of the document remains unchanged.
+
+**Delete - DELETE**
+```JSON
+DELETE my_index/_doc/1
+```
+- Removes the document with ID 1 from the index my_index.
