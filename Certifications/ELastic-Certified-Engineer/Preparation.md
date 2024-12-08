@@ -95,23 +95,22 @@ PUT testindex2 {
 | **Update** | `POST`      | `POST my_index/_update/1`         | Modifies fields of an existing document.|
 | **Delete** | `DELETE`    | `DELETE my_index/_doc/1`          | Removes a document from an index.       |
 
-**Create - POST**
+
 ```JSON
+# 1. Create (Index a Document)
 POST my_index/_doc/1
 {
   "name": "Alice",
   "age": 25,
   "occupation": "Data Analyst"
 }
-```
-- Index: my_index
-- Document ID: 1
-- Content: A JSON object representing the document data.
 
-**Read - GET**
-```JSON
+
+# 2. Read (Retrieve Data)
+## Option 1: 
 GET my_index/_doc/1
 
+## Option 2: 
 GET my_index/_search
 {
   "query": {
@@ -120,22 +119,15 @@ GET my_index/_search
     }
   }
 }
-```
-- Retrieves either a specific document (GET _doc/1) or all documents matching a query (match query for documents with occupation as "Data Analyst").
 
-**Update - POST**
-```JSON
+# 3. Update (Modify an Existing Document)
 POST my_index/_update/1
 {
   "doc": {
     "age": 26
   }
 }
-```
-- Updates only the age field of the document with ID 1. The rest of the document remains unchanged.
 
-**Delete - DELETE**
-```JSON
+# 4. Delete (Remove a Document)
 DELETE my_index/_doc/1
 ```
-- Removes the document with ID 1 from the index my_index.
